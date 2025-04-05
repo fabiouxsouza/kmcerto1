@@ -1,15 +1,14 @@
 const express = require('express');
 const admin = require('firebase-admin');
-require('dotenv').config();
+require('dotenv').config(); // Carrega as variáveis do .env
 
-const serviceAccount = require('./firebase-admin.json');
+const serviceAccount = JSON.parse(process.env.FIREBASE_CREDENTIALS);
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
 const db = admin.firestore();
-
 const app = express();
 const port = process.env.PORT || 3001;
 
