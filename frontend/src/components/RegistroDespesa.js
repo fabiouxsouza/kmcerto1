@@ -25,9 +25,33 @@ function RegistroDespesa() {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log({ tipo, valor, data, descricao, comprovante });
+
+    try {
+      const response = await fetch('http://localhost:3001/despesas', { // Ajuste a URL se necessário
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ tipo, valor, data, descricao, comprovante }),
+      });
+
+      if (response.ok) {
+        const data = await response.text(); // Ou response.json() se o servidor enviar JSON
+        console.log(data);
+        // Limpar o formulário
+        setTipo('');
+        setValor('');
+        setData('');
+        setDescricao('');
+        setComprovante(null);
+      } else {
+        console.error('Erro ao registrar despesa:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Erro ao enviar requisição:', error);
+    }
   };
 
   return (

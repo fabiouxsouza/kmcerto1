@@ -24,5 +24,6 @@ yarn-error.log*
 
 backend/kmcerto1-firebase-admin.json
 backend/kmcerto1-firebase-adminsdk.json
+backend/.env
 
 secrets/

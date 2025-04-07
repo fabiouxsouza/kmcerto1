@@ -1,8 +1,10 @@
+require('dotenv').config(); // Carrega as variáveis do .env
 const express = require('express');
 const admin = require('firebase-admin');
-require('dotenv').config(); // Carrega as variáveis do .env
 
-const serviceAccount = JSON.parse(process.env.FIREBASE_CREDENTIALS);
+console.log(process.env.FIREBASE_CREDENTIALS);
+const serviceAccount = JSON.parse(process.env.FIREBASE_CREDENTIALS.replace(/\\n/g, '\n'));
+
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
